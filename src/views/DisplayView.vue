@@ -1,5 +1,7 @@
 <template>
-  <Game-counter ref="gameCounterRef" @click="requestFullscreen">hi</Game-counter>
+  <Game-counter ref="gameCounterRef" @click="requestFullscreen">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" alt="" class="w-full h-full object-contain" />
+  </Game-counter>
 </template>
 
 <script setup lang="ts">

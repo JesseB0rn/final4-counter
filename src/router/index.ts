@@ -15,5 +15,11 @@ export const router = createRouter({
       meta: { role: "display" },
       component: () => import("../views/DisplayView.vue"),
     },
+    {
+      path: "/ads",
+      name: "Ads",
+      meta: { role: "admin" },
+      component: () => import("../views/AdsEditor.vue"),
+    },
   ],
 });

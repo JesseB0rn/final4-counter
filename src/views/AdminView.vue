@@ -5,9 +5,9 @@
       <router-link v-if="route.name != 'Admin'" to="/" class="text-2xl text-stone-600 hover:text-stone-800">
         <span>Back</span>
       </router-link>
-      <router-link v-if="route.name != 'Matches'" to="/games" class="text-2xl text-stone-600 hover:text-stone-800">
+      <!-- <router-link v-if="route.name != 'Matches'" to="/games" class="text-2xl text-stone-600 hover:text-stone-800">
         <span>Matches</span>
-      </router-link>
+      </router-link> -->
       <!-- <router-link v-if="route.name != 'Players'" to="/players" class="text-2xl text-stone-600 hover:text-stone-800">
         <span>Spieler</span>
       </router-link> -->
@@ -17,8 +17,8 @@
 
       <a :href="`//${host}/dsp`" target="_blank" rel="noopener noreferrer">🖥️</a>
 
-      <button>▶️</button>
-      <button>⏹️</button>
+      <!-- <button>▶️</button>
+      <button>⏹️</button> -->
     </div>
   </header>
 
