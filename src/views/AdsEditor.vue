@@ -33,10 +33,13 @@ import { useLocalStorage } from "../composables/useLocalStorage";
 import { useOPFS } from "../composables/useOPFS";
 import { type adsConfiguration } from "../interfaces/adsConfiguration";
 import { useRoute } from "vue-router";
+import { useMessageStore } from "../stores/messageStore";
 
 const imageDataURIs = ref<Record<string, string>>({});
-
+const msgstore = useMessageStore();
+msgstore.setRole("admin");
 const route = useRoute();
+
 const currentConfig = useLocalStorage<adsConfiguration>("adsConfig", {
   ads: [
     {
@@ -68,7 +71,7 @@ const opfsFileToDataURI = async (filename: string): Promise<string | null> => {
     return new Promise((resolve) => {
       reader.onload = () => {
         const dataURI = reader.result as string;
-        console.log("File converted to Data URI:", dataURI);
+
         resolve(dataURI);
       };
     });
@@ -115,6 +118,14 @@ watch(
           }
         });
       }
+    });
+
+    msgstore.sendMessage({
+      type: "update",
+      payload: {
+        action: "updateAds",
+        data: JSON.stringify(newConfig?.ads || []),
+      },
     });
   },
   { deep: true, immediate: true }

@@ -1,6 +1,6 @@
 <template>
   <Game-counter ref="gameCounterRef" @click="requestFullscreen">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" alt="" class="w-full h-full object-contain" />
+    <Ad-Banner></Ad-Banner>
   </Game-counter>
 </template>
 
@@ -8,6 +8,7 @@
 import { useMessageStore } from "../stores/messageStore";
 import { useGameStore } from "../stores/gameStore";
 import GameCounter from "../components/GameCounter.vue";
+import AdBanner from "../components/AdBanner.vue";
 import { watch, onMounted, ref } from "vue";
 
 const msgstore = useMessageStore();
