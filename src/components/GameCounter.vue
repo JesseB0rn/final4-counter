@@ -8,11 +8,11 @@
     </div>
 
     <div class="relative flex justify-center mx-10 my-4 items-center text-[8em]">
-      <span class="text-4xl text-nowrap shrink min-w-0">{{ gameStore.nameA }}</span>
-      <div class="w-32 text-right flex-1">{{ gameStore.pointsWonA }}</div>
+      <span class="text-4xl text-nowrap shrink min-w-0 flex-1">{{ gameStore.nameA }}</span>
+      <div class="w-32 text-right">{{ gameStore.pointsWonA }}</div>
       <div class="mx-4">–</div>
-      <div class="w-32 flex-1">{{ gameStore.pointsWonB }}</div>
-      <span class="text-4xl text-nowrap shrink min-w-0 text-right">{{ gameStore.nameB }}</span>
+      <div class="w-32">{{ gameStore.pointsWonB }}</div>
+      <span class="text-4xl text-nowrap shrink min-w-0 text-right flex-1">{{ gameStore.nameB }}</span>
     </div>
     <template v-if="$slots.default">
       <div class="ads bg-gray-100 w-full h-full grow"><slot></slot></div>
