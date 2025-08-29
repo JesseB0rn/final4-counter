@@ -5,14 +5,11 @@
       <router-link v-if="route.name != 'Admin'" to="/" class="text-2xl text-stone-600 hover:text-stone-800">
         <span>Back</span>
       </router-link>
-      <!-- <router-link v-if="route.name != 'Matches'" to="/games" class="text-2xl text-stone-600 hover:text-stone-800">
-        <span>Matches</span>
-      </router-link> -->
-      <!-- <router-link v-if="route.name != 'Players'" to="/players" class="text-2xl text-stone-600 hover:text-stone-800">
-        <span>Spieler</span>
-      </router-link> -->
       <router-link v-if="route.name != 'Sponsors'" to="/ads" class="text-2xl text-stone-600 hover:text-stone-800">
         <span>Sponsoren</span>
+      </router-link>
+      <router-link v-if="route.name != 'Teams'" to="/teams" class="text-2xl text-stone-600 hover:text-stone-800">
+        <span>Teams</span>
       </router-link>
 
       <a :href="`//${host}/dsp`" target="_blank" rel="noopener noreferrer">🖥️</a>
