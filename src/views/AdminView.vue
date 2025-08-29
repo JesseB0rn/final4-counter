@@ -22,11 +22,34 @@
   <div class="border-2 border-stone-400 m-4">
     <Game-counter></Game-counter>
   </div>
-  <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="A" v-model="nameAInput" />
-  <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="nameBInput" />
-  <input type="number" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="shownSet" />
-  <input type="number" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="scoreA" />
-  <input type="number" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="scoreB" />
+
+  <div class="flex flex-col m-4 items-center">
+    <div class="flex flex-row items-center">
+      <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="A" v-model="nameAInput" />
+      <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="nameBInput" />
+    </div>
+    <div class="flex flex-row items-center m-4">
+      <label for="shownSet" class="mr-4">Set</label>
+      <div class="flex flex-row items-center rounded-2xl bg-stone-800">
+        <button class="p-4 text-white w-12" @click="shownSet++">+</button>
+        <input type="number" class="rounded-2xl bg-stone-200 mr-0 p-4 grow font-bold w-16" placeholder="B" v-model="shownSet" />
+        <button class="p-4 text-white w-12" @click="shownSet--">-</button>
+      </div>
+    </div>
+    <div class="flex flex-row m-4">
+      <div class="flex flex-row items-center rounded-2xl bg-stone-800">
+        <button class="p-4 text-white min-w-12" @click="scoreA++">+</button>
+        <input type="number" class="rounded-2xl bg-stone-200 mr-0 p-4 grow font-bold w-16" placeholder="B" v-model="scoreA" />
+        <button class="p-4 text-white min-w-12" @click="scoreA--">-</button>
+      </div>
+      <span class="mx-4 text-bold text-2xl">:</span>
+      <div class="flex flex-row items-center rounded-2xl bg-stone-800">
+        <button class="p-4 text-white min-w-12" @click="scoreB++">+</button>
+        <input type="number" class="rounded-2xl bg-stone-200 mr-0 p-4 grow font-bold w-16" placeholder="B" v-model="scoreB" />
+        <button class="p-4 text-white min-w-12" @click="scoreB--">-</button>
+      </div>
+    </div>
+  </div>
 
   <!-- <set-input></set-input> -->
 </template>
