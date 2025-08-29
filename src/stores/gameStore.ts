@@ -4,6 +4,8 @@ import { ref } from "vue";
 export interface IGameData {
   AName: string | undefined;
   BName: string | undefined;
+  AId: string | undefined;
+  BId: string | undefined;
   sets: ISetData[];
   currentSetShow?: number;
 }
@@ -20,6 +22,8 @@ export const useGameStore = defineStore("game", {
     gameData: ref<IGameData>({
       AName: undefined,
       BName: undefined,
+      AId: undefined,
+      BId: undefined,
       sets: [
         { setNumber: 1, scoreA: 0, scoreB: 0 },
         { setNumber: 2, scoreA: 0, scoreB: 0 },
@@ -54,6 +58,12 @@ export const useGameStore = defineStore("game", {
     nameB: (state) => {
       return state.gameData?.BName || "B";
     },
+    idA: (state) => {
+      return state.gameData?.AId || "A";
+    },
+    idB: (state) => {
+      return state.gameData?.BId || "B";
+    },
     fullGameState: (state) => {
       return state.gameData;
     },
@@ -65,6 +75,8 @@ export const useGameStore = defineStore("game", {
     setGameState(gameData: IGameData) {
       this.gameData.AName = gameData.AName;
       this.gameData.BName = gameData.BName;
+      this.gameData.AId = gameData.AId;
+      this.gameData.BId = gameData.BId;
       this.gameData.sets = gameData.sets.map((set) => ({
         setNumber: set.setNumber,
         scoreA: set.scoreA,
@@ -78,6 +90,12 @@ export const useGameStore = defineStore("game", {
     },
     setNameB(name: string) {
       this.gameData.BName = name;
+    },
+    setIdA(id: string) {
+      this.gameData.AId = id;
+    },
+    setIdB(id: string) {
+      this.gameData.BId = id;
     },
   },
 });

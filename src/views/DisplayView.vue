@@ -10,10 +10,13 @@ import { useGameStore } from "../stores/gameStore";
 import GameCounter from "../components/GameCounter.vue";
 import AdBanner from "../components/AdBanner.vue";
 import { watch, onMounted, ref } from "vue";
+import { useLocalStorage } from "../composables/useLocalStorage";
+import type { ITeam } from "../interfaces/team";
 
 const msgstore = useMessageStore();
 
 const gameCounterRef = ref<InstanceType<typeof GameCounter> | null>(null);
+const teams = useLocalStorage<ITeam[]>("teams", []);
 
 msgstore.setRole("display");
 
@@ -35,6 +38,10 @@ watch(
       if (newValue.type === "update" && newValue.payload.action === "setGameState") {
         console.log("Updating game state with:", newValue.payload.data);
         useGameStore().setGameState(newValue.payload.data);
+      }
+      if (newValue.type === "update" && newValue.payload.action === "updateTeams") {
+        console.log("Updating teams with:", newValue.payload.data);
+        teams.value = JSON.parse(newValue.payload.data);
       }
     }
   },

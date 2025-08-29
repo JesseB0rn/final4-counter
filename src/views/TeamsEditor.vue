@@ -19,13 +19,14 @@
 
   <button class="rounded-2xl bg-stone-600 text-white m-2 mr-0 p-4 font-bold" @click="addTeam">+</button>
   <div class="flex flex-row flex-wrap">
-    <div v-for="team in teams || []" :key="team.name">
+    <div v-for="team in teams || []" :key="team.id">
       <div class="flex-1">
         <img :src="imageDataURIs[team.filename] || ''" alt="" class="w-full h-full max-w-96" />
       </div>
       <div class="flex flex-col">
         <button class="rounded-2xl bg-red-600 text-white m-2 mr-0 p-4 grow font-bold" @click="deleteTeam(team)">CLS</button>
-        <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="base64" v-model="team.filename" />
+        <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="name" v-model="team.name" />
+        <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="filename" v-model="team.filename" />
         <input type="file" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" @change="onFileChange(team, $event)" />
       </div>
     </div>
@@ -53,6 +54,7 @@ const addTeam = () => {
     ...(teams.value || []),
     {
       name: "Team Name",
+      id: uuidv4(),
       filename: "",
     },
   ];

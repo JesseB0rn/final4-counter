@@ -25,8 +25,14 @@
 
   <div class="flex flex-col m-4 items-center">
     <div class="flex flex-row items-center">
-      <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="A" v-model="nameAInput" />
-      <input type="text" class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" placeholder="B" v-model="nameBInput" />
+      <select class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" v-model="nameAInput">
+        <option value="">Select Team A</option>
+        <option v-for="team in teams" :key="team.id" :value="[team.name, team.id]">{{ team.name }}</option>
+      </select>
+      <select class="rounded-2xl bg-stone-200 m-2 mr-0 p-4 grow font-bold" v-model="nameBInput">
+        <option value="">Select Team B</option>
+        <option v-for="team in teams" :key="team.id" :value="[team.name, team.id]">{{ team.name }}</option>
+      </select>
     </div>
     <div class="flex flex-row items-center m-4">
       <label for="shownSet" class="mr-4">Set</label>
@@ -66,20 +72,26 @@ import { useMessageStore } from "../stores/messageStore";
 import { useGameStore } from "../stores/gameStore";
 import { watch } from "vue";
 import { computed } from "vue";
+import { useLocalStorage } from "../composables/useLocalStorage";
+import type { ITeam } from "../interfaces/team";
 const msgStore = useMessageStore();
 msgStore.setRole("admin");
 const gameStore = useGameStore();
 
+const teams = useLocalStorage<ITeam[]>("teams", []);
+
 const nameAInput = computed({
-  get: () => gameStore.nameA,
+  get: () => [gameStore.nameA, gameStore.idA],
   set: (value) => {
-    gameStore.setNameA(value);
+    gameStore.setNameA(value[0]);
+    gameStore.setIdA(value[1]);
   },
 });
 const nameBInput = computed({
-  get: () => gameStore.nameB,
+  get: () => [gameStore.nameB, gameStore.idB],
   set: (value) => {
-    gameStore.setNameB(value);
+    gameStore.setNameB(value[0]);
+    gameStore.setIdB(value[1]);
   },
 });
 const shownSet = computed({
@@ -105,6 +117,8 @@ const scoreB = computed({
 gameStore.setGameState({
   AName: "STV Oberentfelden",
   BName: "STV Affeltrangen",
+  AId: undefined,
+  BId: undefined,
   sets: [
     { setNumber: 1, scoreA: 0, scoreB: 0 },
     { setNumber: 2, scoreA: 0, scoreB: 0 },
