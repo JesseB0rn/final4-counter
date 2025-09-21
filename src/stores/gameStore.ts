@@ -8,6 +8,7 @@ export interface IGameData {
   BId: string | undefined;
   sets: ISetData[];
   currentSetShow?: number;
+  showGame: boolean;
 }
 
 export interface ISetData {
@@ -36,6 +37,7 @@ export const useGameStore = defineStore("game", {
         { setNumber: 9, scoreA: 0, scoreB: 0 },
       ],
       currentSetShow: 1,
+      showGame: true,
     }),
   }),
   getters: {
@@ -70,6 +72,9 @@ export const useGameStore = defineStore("game", {
     currentSetShow: (state) => {
       return state.gameData?.currentSetShow || 1;
     },
+    shouldShowGame: (state) => {
+      return state.gameData?.showGame;
+    },
   },
   actions: {
     setGameState(gameData: IGameData) {
@@ -84,6 +89,7 @@ export const useGameStore = defineStore("game", {
         finalized: hasSetBeenWon(set.scoreA, set.scoreB),
       }));
       this.gameData.currentSetShow = gameData.currentSetShow;
+      this.gameData.showGame = gameData.showGame;
     },
     setNameA(name: string) {
       this.gameData.AName = name;

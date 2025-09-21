@@ -55,6 +55,12 @@
         <button class="p-4 text-white min-w-12" @click="scoreB--">-</button>
       </div>
     </div>
+    <div class="m-4">
+      <label class="mr-4">
+        <input type="checkbox" v-model="showGame" />
+        Show Game
+      </label>
+    </div>
   </div>
 
   <!-- <set-input></set-input> -->
@@ -114,6 +120,13 @@ const scoreB = computed({
   },
 });
 
+const showGame = computed({
+  get: () => gameStore.shouldShowGame,
+  set: (value) => {
+    gameStore.gameData.showGame = value;
+  },
+});
+
 gameStore.setGameState({
   AName: "STV Oberentfelden",
   BName: "STV Affeltrangen",
@@ -130,6 +143,8 @@ gameStore.setGameState({
     { setNumber: 8, scoreA: 0, scoreB: 0 },
     { setNumber: 9, scoreA: 0, scoreB: 0 },
   ],
+  currentSetShow: 1,
+  showGame: false,
 });
 
 watch(
@@ -144,7 +159,7 @@ watch(
       },
     });
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 </script>
 <style scoped></style>
