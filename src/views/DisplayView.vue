@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { useMessageStore } from "../stores/messageStore";
-import { useGameStore } from "../stores/gameStore";
-import GameCounter from "../components/GameCounter.vue";
+import { ref, watch } from "vue";
 import AdBanner from "../components/AdBanner.vue";
-import { watch, onMounted, ref } from "vue";
+import GameCounter from "../components/GameCounter.vue";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import type { ITeam } from "../interfaces/team";
+import { useGameStore } from "../stores/gameStore";
+import { useMessageStore } from "../stores/messageStore";
 
 const msgstore = useMessageStore();
 
@@ -45,7 +45,7 @@ watch(
       }
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 <style scoped></style>
