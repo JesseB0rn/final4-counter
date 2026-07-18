@@ -74,12 +74,11 @@ const route = useRoute();
 
 const host = window.location.host;
 
-import { useMessageStore } from "../stores/messageStore";
-import { useGameStore } from "../stores/gameStore";
-import { watch } from "vue";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import type { ITeam } from "../interfaces/team";
+import { useGameStore } from "../stores/gameStore";
+import { useMessageStore } from "../stores/messageStore";
 const msgStore = useMessageStore();
 msgStore.setRole("admin");
 const gameStore = useGameStore();
@@ -132,6 +131,8 @@ gameStore.setGameState({
   BName: "STV Affeltrangen",
   AId: undefined,
   BId: undefined,
+  ALogo: undefined,
+  BLogo: undefined,
   sets: [
     { setNumber: 1, scoreA: 0, scoreB: 0 },
     { setNumber: 2, scoreA: 0, scoreB: 0 },
@@ -159,7 +160,7 @@ watch(
       },
     });
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 );
 </script>
 <style scoped></style>

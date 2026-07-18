@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useOldServerBridge } from "./composables/useOldServerBridge";
+
+useOldServerBridge();
+</script>
 
 <template>
   <router-view v-slot="{ Component }">

@@ -6,6 +6,8 @@ export interface IGameData {
   BName: string | undefined;
   AId: string | undefined;
   BId: string | undefined;
+  ALogo: string | undefined;
+  BLogo: string | undefined;
   sets: ISetData[];
   currentSetShow?: number;
   showGame: boolean;
@@ -25,6 +27,8 @@ export const useGameStore = defineStore("game", {
       BName: undefined,
       AId: undefined,
       BId: undefined,
+      ALogo: undefined,
+      BLogo: undefined,
       sets: [
         { setNumber: 1, scoreA: 0, scoreB: 0 },
         { setNumber: 2, scoreA: 0, scoreB: 0 },
@@ -82,6 +86,8 @@ export const useGameStore = defineStore("game", {
       this.gameData.BName = gameData.BName;
       this.gameData.AId = gameData.AId;
       this.gameData.BId = gameData.BId;
+      this.gameData.ALogo = gameData.ALogo;
+      this.gameData.BLogo = gameData.BLogo;
       this.gameData.sets = gameData.sets.map((set) => ({
         setNumber: set.setNumber,
         scoreA: set.scoreA,

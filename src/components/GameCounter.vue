@@ -11,8 +11,8 @@
       <div class="relative flex justify-center mx-10 my-4 items-center text-[12rem]">
         <div class="flex flex-col flex-1">
           <span class="text-7xl text-nowrap min-w-0 flex-1 mb-8">{{ gameStore.nameA }}</span>
-          <div class="flex justify-center mb-8" v-if="imageDataURIs[teams?.find((team) => team.id === gameStore.idA.value)?.filename ?? '']">
-            <img :src="imageDataURIs[teams?.find((team) => team.id === gameStore.idA.value)?.filename ?? '']" alt="Team A Logo" class="w-[700px] h-64 object-contain mt-4" />
+          <div class="flex justify-center mb-8" v-if="teamALogo">
+            <img :src="teamALogo" alt="Team A Logo" class="w-[700px] h-64 object-contain mt-4" />
           </div>
         </div>
         <div class="w-64 text-right">{{ gameStore.pointsWonA }}</div>
@@ -20,8 +20,8 @@
         <div class="w-64">{{ gameStore.pointsWonB }}</div>
         <div class="flex flex-col flex-1">
           <span class="text-7xl text-nowrap min-w-0 text-right flex-1 mb-8">{{ gameStore.nameB }}</span>
-          <div class="flex justify-center mb-8" v-if="imageDataURIs[teams?.find((team) => team.id === gameStore.idB.value)?.filename ?? '']">
-            <img :src="imageDataURIs[teams?.find((team) => team.id === gameStore.idB.value)?.filename ?? '']" alt="Team B Logo" class="w-[700px] h-64 object-contain mt-4" />
+          <div class="flex justify-center mb-8" v-if="teamBLogo">
+            <img :src="teamBLogo" alt="Team B Logo" class="w-[700px] h-64 object-contain mt-4" />
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, toRefs, watch } from "vue";
+import { computed, ref, toRefs, watch } from "vue";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import { useOPFS } from "../composables/useOPFS";
 import type { ITeam } from "../interfaces/team";
@@ -64,6 +64,29 @@ const opfsFileToDataURI = async (filename: string): Promise<string | null> => {
   }
   return null;
 };
+
+const isDirectImageSource = (value: string | undefined): value is string => {
+  return !!value && /^(https?:\/\/|\/|data:)/.test(value);
+};
+
+const resolveTeamLogo = (teamId: string | undefined): string => {
+  if (!teamId) {
+    return "";
+  }
+
+  const localTeam = teams.value?.find((team) => team.id === teamId);
+  if (localTeam?.filename) {
+    const localImage = imageDataURIs.value[localTeam.filename];
+    if (localImage) {
+      return localImage;
+    }
+  }
+
+  return isDirectImageSource(teamId) ? teamId : "";
+};
+
+const teamALogo = computed(() => resolveTeamLogo(gameStore.idA.value));
+const teamBLogo = computed(() => resolveTeamLogo(gameStore.idB.value));
 
 watch(
   teams,
