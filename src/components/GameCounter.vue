@@ -28,7 +28,7 @@
     </template>
     <template v-else>
       <div class="flex justify-center items-center mt-32">
-        <img src="../assets/FBC_Logo_farbig.png" alt="" class="w-[1200px] object-contain" />
+        <img src="../assets/emwm.png" alt="" class="w-[1200px] object-contain" />
       </div>
     </template>
 
@@ -39,10 +39,10 @@
 </template>
 <script setup lang="ts">
 import { ref, toRefs, watch } from "vue";
-import { useGameStore } from "../stores/gameStore";
 import { useLocalStorage } from "../composables/useLocalStorage";
-import type { ITeam } from "../interfaces/team";
 import { useOPFS } from "../composables/useOPFS";
+import type { ITeam } from "../interfaces/team";
+import { useGameStore } from "../stores/gameStore";
 
 const gameStore = toRefs(useGameStore());
 const teams = useLocalStorage<ITeam[]>("teams", []);
@@ -80,6 +80,6 @@ watch(
       }
     });
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
